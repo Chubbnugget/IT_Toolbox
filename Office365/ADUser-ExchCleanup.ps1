@@ -1,0 +1,88 @@
+
+################################################################
+# Remove Inactive Users
+################################################################
+
+$InactiveMembers = @(
+    '0016',
+    '0027',
+    '0049',
+    '0058',
+    '0103',
+    '0109',
+    '0131',
+    '0148',
+    '0228',
+    '0331',
+    '0348',
+    '0354',
+    '0436',
+    '0448',
+    '0463',
+    '0467',
+    '0482',
+   '0590',
+    '0616',
+    '0721',
+    '0804',
+    '0815',
+    '0821',
+    '0833',
+    '0958',
+    '0963',
+    '1043',
+    '1621',
+    '1628',
+    '1648',
+    '1685',
+    '1768',
+    '1796',
+    '1977',
+    '2052',
+    '2106',
+    '2383',
+    '2612',
+    '2913',
+    '2923',
+    '3501',
+    '3726',
+    '3737',
+    '3830',
+    '4102',
+    '4201',
+    '4710',
+    '6664',
+    '6717',
+    '6724',
+    '6752',
+    '6763',
+    '6902',
+    '6992',
+    '6994',
+    '7240',
+    '7261',
+    '7311',
+    '7314',
+    '7326',
+    '7356',
+    '7397',
+    '7421',
+    '7428',
+    '7513',
+    '7517',
+    '7619',
+    '7743',
+    '7759',
+    '8016',
+    '8065',
+    '8150',
+    '8170'
+    )
+
+Foreach($InactiveMember in $InactiveMembers){
+    Write-host Removing Member : $InactiveMember
+    Remove-ADGroupMember -Identity "sec_License_Stores_ExchangeKiosk" -Members $InactiveMember -Confirm:$false
+    Write-Host Disabling $InactiveMember.Name and setting Description: $NewDescription
+    $NewDescription = "# Disabled (Closed) " + $Now + "#"
+    Set-ADUser -Identity $InactiveMember -Enabled $false -Description $NewDescription -Verbose
+}

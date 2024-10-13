@@ -1,0 +1,2 @@
+Get-ADGroupMember -identity Domain Admins | Get-ADUser -Property Enabled | select Name, Enabled | Export-csv -path C:\Temp\DomainAdminsExport.csv -NoTypeInformation
+Get-ADGroupMember -identity Enterprise Admins | Get-ADUser -Property Enabled | select Name, Enabled | Export-csv -path C:\Temp\EnterpriseAdminsExport.csv -NoTypeInformation 
